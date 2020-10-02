@@ -1921,8 +1921,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1956,6 +1954,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37566,7 +37575,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "shadow-sm" }, [
     _c(
       "form",
       {
@@ -37604,9 +37613,7 @@ var render = function() {
         _vm._v(" "),
         _vm._m(0)
       ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" })
+    )
   ])
 }
 var staticRenderFns = [
@@ -37647,12 +37654,46 @@ var render = function() {
   return _c(
     "div",
     _vm._l(_vm.statuses, function(status) {
-      return _c("div", { domProps: { textContent: _vm._s(status.body) } })
+      return _c("div", { staticClass: "card mb-3 border-0 shadow-sm" }, [
+        _c("div", { staticClass: "card-body d-flex flex-column " }, [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c("p", {
+            staticClass: "card-text text-secondary",
+            domProps: { textContent: _vm._s(status.body) }
+          })
+        ])
+      ])
     }),
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
+      _c("img", {
+        staticClass: "rounded mr-3 shadow-sm",
+        attrs: {
+          width: "40px",
+          src: "https://i.ibb.co/HtZWgQj/default-avatar.jpg",
+          alt: "default-avatar",
+          border: "0"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", {}, [
+        _c("h5", { staticClass: "mb-1" }, [_vm._v("Gary M")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "small text-muted" }, [
+          _vm._v("Hace una hora")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
