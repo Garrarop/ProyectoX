@@ -9,8 +9,7 @@
       </div>
     </form>
     <div class="card-body">
-      <div v-for="status in statuses"  v-text="status.body"></div>
-    </div>
+  </div>
 </div>
 </template>
 
@@ -19,14 +18,13 @@
     data(){
       return{
         body: '',
-        statuses: []
       }
     },
     methods: {
       submit(){
         axios.post('/statuses', {body: this.body})
         .then(res => {
-          this.statuses.push(res.data);
+          EventBus.$emit('status-created', res.data)
           this.body = ''
         })
         .catch(err => {

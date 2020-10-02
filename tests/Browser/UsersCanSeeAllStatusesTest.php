@@ -21,8 +21,11 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($statuses){
             $browser->visit('/')
                     ->waitForText($statuses->first()->body)
-                    ->assertSee($statuses->first()->body)
-                    ;
+                    ->assertSee($statuses->first()->body);
+
+            foreach ($statuses as $status) {
+                $browser->assertSee($status->body);
+            }
         });
     }
 }

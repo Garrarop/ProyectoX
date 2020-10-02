@@ -1923,12 +1923,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      body: '',
-      statuses: []
+      body: ''
     };
   },
   methods: {
@@ -1938,8 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/statuses', {
         body: this.body
       }).then(function (res) {
-        _this.statuses.push(res.data);
-
+        EventBus.$emit('status-created', res.data);
         _this.body = '';
       })["catch"](function (err) {
         console.log(err.response.data);
@@ -1978,6 +1975,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.statuses = res.data.data;
     })["catch"](function (err) {
       console.log(err.response.data);
+    });
+    EventBus.$on('status-created', function (status) {
+      _this.statuses.unshift(status);
     });
   }
 });
@@ -37606,14 +37606,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      _vm._l(_vm.statuses, function(status) {
-        return _c("div", { domProps: { textContent: _vm._s(status.body) } })
-      }),
-      0
-    )
+    _c("div", { staticClass: "card-body" })
   ])
 }
 var staticRenderFns = [
@@ -49853,6 +49846,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+window.EventBus = new Vue();
 Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm.vue */ "./resources/js/components/StatusForm.vue")["default"]);
 Vue.component('statuses-list', __webpack_require__(/*! ./components/StatusesList.vue */ "./resources/js/components/StatusesList.vue")["default"]);
 /**

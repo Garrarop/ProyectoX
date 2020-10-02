@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="status in statuses"  v-text="status.body"></div>    
+    <div v-for="status in statuses"  v-text="status.body"></div>
   </div>
 </template>
 
@@ -18,7 +18,10 @@
           })
           .catch(err => {
             console.log(err.response.data);
-          })
+          });
+        EventBus.$on('status-created', status =>  {
+          this.statuses.unshift(status);
+        })
       }
     }
 </script>
