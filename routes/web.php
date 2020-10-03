@@ -19,10 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Statuses routes
 Route::get('statuses', 'StatusesController@index')->name('statuses.index');
 
 Route::post('statuses', 'StatusesController@store')->name('statuses.store')->middleware('auth');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Statuses Likes routes
+Route::post('statuses/{status}/likes', 'StatusLikesController@store')->name('statuses.likes.store')->middleware('auth');
