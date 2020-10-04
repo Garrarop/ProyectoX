@@ -1975,6 +1975,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1992,6 +1994,13 @@ __webpack_require__.r(__webpack_exports__);
     EventBus.$on('status-created', function (status) {
       _this.statuses.unshift(status);
     });
+  },
+  methods: {
+    like: function like(status) {
+      axios.post("/statuses/".concat(status.id, "/likes")).then(function (res) {
+        status.is_liked = true;
+      });
+    }
   }
 });
 
@@ -37697,7 +37706,25 @@ var render = function() {
           _c("p", {
             staticClass: "card-text text-secondary",
             domProps: { textContent: _vm._s(status.body) }
-          })
+          }),
+          _vm._v(" "),
+          status.is_liked
+            ? _c("button", { staticClass: "btn btn-success" }, [
+                _vm._v("TE GUSTA")
+              ])
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { dusk: "like-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.like(status)
+                    }
+                  }
+                },
+                [_vm._v("ME GUSTA")]
+              )
         ])
       ])
     }),
