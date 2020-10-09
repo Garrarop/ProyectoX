@@ -11,9 +11,13 @@
         </div>
         <p class="card-text text-secondary" v-text="status.body"></p>
       </div>
-      <div class="card-footer p-2">
-        <button v-if="status.is_liked" dusk="unlike-btn" @click="unlike(status)" class="btn btn-link"><strong><i class="fas fa-thumbs-up text-primary mr-1 btn-sm"></i> TE GUSTA</strong></button>
-        <button v-else dusk="like-btn" @click="like(status)" class="btn btn-link"><i class="far fa-thumbs-up text-primary mr-1 btn-sm"></i>ME GUSTA</button>
+      <div class="card-footer p-2 d-flex justify-content-between align-items-center">
+        <button v-if="status.is_liked" dusk="unlike-btn" @click="unlike(status)" class="btn btn-link btn-sm"><strong><i class="fas fa-thumbs-up text-primary mr-1"></i> TE GUSTA</strong></button>
+        <button v-else dusk="like-btn" @click="like(status)" class="btn btn-link btn-sm"><i class="far fa-thumbs-up text-primary mr-1"></i>ME GUSTA</button>
+        <div class="mr-2 text-secondary">
+          <i class="far fa-thumbs-up"></i>
+          <span dusk="likes-count">{{ status.likes_count }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -43,12 +47,14 @@
           axios.post(`/statuses/${status.id}/likes`)
             .then(res => {
                 status.is_liked = true
+                status.likes_count++;
             })
         },
         unlike(status){
           axios.delete(`/statuses/${status.id}/likes`)
             .then(res => {
                 status.is_liked = false
+                status.likes_count--;
             })
         }
       }
