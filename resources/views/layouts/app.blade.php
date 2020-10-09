@@ -8,12 +8,16 @@
     <meta name="user" content="{{ Auth::user() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c12a6e0397.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light navbar-proyectox shadow-sm">
       <div class="container">
-          <a class="navbar-brand" href="{{ route('welcome') }}">{{ config('app.name', 'Laravel') }}</a>
+          <a class="navbar-brand" href="{{ route('welcome') }}">
+            <i class="fab fa-xing-square text-primary mr-1"></i>
+            {{ config('app.name', 'Laravel') }}
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -47,6 +51,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                                     <i class="fas fa-sign-out-alt text-primary mr-1"></i>
                                         {{ __('Logout') }}
                                     </a>
 
