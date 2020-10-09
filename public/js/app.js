@@ -2000,6 +2000,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/statuses/".concat(status.id, "/likes")).then(function (res) {
         status.is_liked = true;
       });
+    },
+    unlike: function unlike(status) {
+      axios["delete"]("/statuses/".concat(status.id, "/likes")).then(function (res) {
+        status.is_liked = false;
+      });
     }
   }
 });
@@ -37709,9 +37714,19 @@ var render = function() {
           }),
           _vm._v(" "),
           status.is_liked
-            ? _c("button", { staticClass: "btn btn-success" }, [
-                _vm._v("TE GUSTA")
-              ])
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { dusk: "unlike-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.unlike(status)
+                    }
+                  }
+                },
+                [_vm._v("TE GUSTA")]
+              )
             : _c(
                 "button",
                 {
