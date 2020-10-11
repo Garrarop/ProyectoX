@@ -21,6 +21,13 @@ class CommentResourceTest extends TestCase
         $commentResource = CommentResource::make($comment)->resolve();
 
         $this->assertEquals($comment->body, $commentResource['body']);
-        ;
+
+        $this->assertEquals(
+          $comment->user->name,
+          $commentResource['user_name']
+        );
+
+        $this->assertEquals('https://i.ibb.co/HtZWgQj/default-avatar.jpg', $commentResource['user_avatar']);
+
     }
 }

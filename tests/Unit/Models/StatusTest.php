@@ -6,6 +6,7 @@ use App\User;
 use Tests\TestCase;
 use App\Models\Like;
 use App\Models\Status;
+use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StatusTest extends TestCase
@@ -20,10 +21,16 @@ class StatusTest extends TestCase
 
         $this->assertInstanceOf(User::class, $status->user);
     }
+    /** @test */
+    public function a_status_has_many_comments()
+    {
+      $status = factory(Status::class)->create();
 
-    /**
-      * @test
-      */
+      factory(Comment::class)->create(['status_id' => $status->id]);
+
+      $this->assertInstanceOf(Comment::class, $status->comments->first());
+    }
+    /** @test */
     public function a_status_has_many_likes()
     {
       $status = factory(Status::class)->create();
