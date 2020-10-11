@@ -31,7 +31,7 @@
         <div class="d-flex align-items-center">
           <img width="34px" class="mr-2 rounded shadow-sm" src='https://i.ibb.co/HtZWgQj/default-avatar.jpg' :alt="currentUser.name">
           <div class="input-group">
-            <textarea class="form-control border-0 shadow-sm" placeholder="Escribe un comentario" name="comment" rows="1" v-model="newComment"></textarea>
+            <textarea class="form-control border-0 shadow-sm" required placeholder="Escribe un comentario" name="comment" rows="1" v-model="newComment"></textarea>
             <div class="input-group-append">
               <button class="btn btn-primary" dusk="comment-btn">Enviar</button>
             </div>
@@ -67,6 +67,9 @@
           .then(res =>{
             this.newComment = '';
             this.comments.push(res.data.data);
+          })
+          .catch(err => {
+            console.log(err.response.data)
           })
       }
     }

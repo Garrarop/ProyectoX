@@ -2,7 +2,7 @@
   <div class="shadow-sm" v-if="isAuthenticated">
     <form @submit.prevent="submit" >
       <div class="card-body">
-          <textarea v-model="body" class="form-control border-0 bg-light"
+          <textarea v-model="body" required class="form-control border-0 bg-light"
                     :placeholder="`¿Qué estas pensando ${currentUser.name}?`" name="body"></textarea>
       </div>
       <div class="card-footer">

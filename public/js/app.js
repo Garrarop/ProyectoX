@@ -2113,6 +2113,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.newComment = '';
 
         _this.comments.push(res.data.data);
+      })["catch"](function (err) {
+        console.log(err.response.data);
       });
     }
   }
@@ -37790,6 +37792,7 @@ var render = function() {
                 ],
                 staticClass: "form-control border-0 bg-light",
                 attrs: {
+                  required: "",
                   placeholder:
                     "¿Qué estas pensando " + _vm.currentUser.name + "?",
                   name: "body"
@@ -37997,6 +38000,7 @@ var render = function() {
                       ],
                       staticClass: "form-control border-0 shadow-sm",
                       attrs: {
+                        required: "",
                         placeholder: "Escribe un comentario",
                         name: "comment",
                         rows: "1"
