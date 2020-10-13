@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-proyectox shadow-sm">
       <div class="container">
           <a class="navbar-brand" href="{{ route('welcome') }}">
-            <i class="fab fa-xing-square text-primary mr-1"></i>
+            <i class="fas fa-dragon text-primary mr-1"></i>
             {{ config('app.name', 'Laravel') }}
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

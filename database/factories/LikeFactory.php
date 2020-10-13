@@ -8,12 +8,12 @@ use App\Models\Status;
 use Faker\Generator as Faker;
 
 $factory->define(Like::class, function (Faker $faker) {
+    $status = factory(Status::class)->create();
     return [
         'user_id' => function(){
           return factory(User::class)->create();
         },
-        'status_id' => function(){
-          return factory(Status::class)->create();
-        }
+        'likeable_id' => $status->id,
+        'likeable_type' => get_class($status)
     ];
 });
