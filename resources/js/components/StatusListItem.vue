@@ -23,19 +23,21 @@
     </div>
     <div class="card-footer">
       <div v-for="comment in comments" class="mb-3">
-        <img width="34px" class="mr-2 rounded shadow-sm float-left" :src="comment.user_avatar" :alt="comment.user_name">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body p-2 text-secondary">
-            <a href="#"><strong>{{ comment.user_name }}</strong></a>
-            {{ comment.body }}
+        <div class="d-flex">
+          <img height="34px" class="mr-2 rounded shadow-sm" :src="comment.user_avatar" :alt="comment.user_name">
+          <div class="flex-grow-1">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body pt-2 pl-2 pr-2 pb-0 text-secondary">
+                <a href="#"><strong>{{ comment.user_name }}</strong></a>
+                {{ comment.body }}
+              </div>
+              <div class="">
+                <LikeBtn class="comments-like-btn" dusk="comment-like-btn" :model="comment" :url="`/comments/${comment.id}/likes`"></LikeBtn>
+                <small class="badge badge-primary badge-pill float-right pt-1 px-2 mr-1" dusk="comment-likes-count">{{ comment.likes_count }}</small>
+              </div>
+            </div>
           </div>
         </div>
-        <LikeBtn
-        dusk="comment-like-btn"
-        :model="comment"
-        :url="`/comments/${comment.id}/likes`"
-        ></LikeBtn>
-        <span dusk="comment-likes-count">{{ comment.likes_count }}</span>
       </div>
       <form @submit.prevent="addComment" v-if="isAuthenticated">
         <div class="d-flex align-items-center">
