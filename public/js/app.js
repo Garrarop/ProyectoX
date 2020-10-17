@@ -1912,26 +1912,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    status: {
+    model: {
       type: Object,
+      required: true
+    },
+    url: {
+      type: String,
       required: true
     }
   },
   methods: {
-    like: function like(status) {
-      axios.post("/statuses/".concat(status.id, "/likes")).then(function (res) {
-        status.is_liked = true;
-        status.likes_count++;
+    toggle: function toggle() {
+      var _this = this;
+
+      var method = this.model.is_liked ? 'delete' : 'post';
+      axios[method](this.url).then(function (res) {
+        _this.model.is_liked = !_this.model.is_liked;
+
+        if (method === 'post') {
+          _this.model.likes_count++;
+        } else {
+          _this.model.likes_count--;
+        }
       });
+    }
+  },
+  computed: {
+    getText: function getText() {
+      return this.model.is_liked ? 'TE GUSTA' : 'ME GUSTA';
     },
-    unlike: function unlike(status) {
-      axios["delete"]("/statuses/".concat(status.id, "/likes")).then(function (res) {
-        status.is_liked = false;
-        status.likes_count--;
-      });
+    getBtnClasses: function getBtnClasses() {
+      return [this.model.is_liked ? 'font-weight-bold' : '', 'btn', 'btn-link', 'btn-sm'];
+    },
+    getIconClasses: function getIconClasses() {
+      return [this.model.is_liked ? 'fas' : 'far', 'fa-thumbs-up', 'text-primary', 'mr-1'];
     }
   }
 });
@@ -2042,6 +2058,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LikeBtn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LikeBtn */ "./resources/js/components/LikeBtn.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37704,48 +37730,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.status.is_liked
-    ? _c(
-        "button",
-        {
-          staticClass: "btn btn-link btn-sm",
-          attrs: { dusk: "unlike-btn" },
-          on: {
-            click: function($event) {
-              return _vm.unlike(_vm.status)
-            }
-          }
-        },
-        [_vm._m(0)]
-      )
-    : _c(
-        "button",
-        {
-          staticClass: "btn btn-link btn-sm",
-          attrs: { dusk: "like-btn" },
-          on: {
-            click: function($event) {
-              return _vm.like(_vm.status)
-            }
-          }
-        },
-        [
-          _c("i", { staticClass: "far fa-thumbs-up text-primary mr-1" }),
-          _vm._v("ME GUSTA")
-        ]
-      )
+  return _c(
+    "button",
+    {
+      class: _vm.getBtnClasses,
+      on: {
+        click: function($event) {
+          return _vm.toggle()
+        }
+      }
+    },
+    [_c("i", { class: _vm.getIconClasses }), _vm._v(_vm._s(_vm.getText))]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("strong", [
-      _c("i", { staticClass: "fas fa-thumbs-up text-primary mr-1" }),
-      _vm._v(" TE GUSTA")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -37927,7 +37925,13 @@ var render = function() {
           "card-footer p-2 d-flex justify-content-between align-items-center"
       },
       [
-        _c("LikeBtn", { attrs: { status: _vm.status } }),
+        _c("LikeBtn", {
+          attrs: {
+            dusk: "like-btn",
+            model: _vm.status,
+            url: "/statuses/" + _vm.status.id + "/likes"
+          }
+        }),
         _vm._v(" "),
         _c("div", { staticClass: "mr-2 text-secondary" }, [
           _c("i", { staticClass: "far fa-thumbs-up" }),
@@ -37945,25 +37949,42 @@ var render = function() {
       { staticClass: "card-footer" },
       [
         _vm._l(_vm.comments, function(comment) {
-          return _c("div", { staticClass: "mb-3" }, [
-            _c("img", {
-              staticClass: "mr-2 rounded shadow-sm float-left",
-              attrs: {
-                width: "34px",
-                src: comment.user_avatar,
-                alt: comment.user_name
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "card border-0 shadow-sm" }, [
-              _c("div", { staticClass: "card-body p-2 text-secondary" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("strong", [_vm._v(_vm._s(comment.user_name))])
-                ]),
-                _vm._v("\n          " + _vm._s(comment.body) + "\n        ")
+          return _c(
+            "div",
+            { staticClass: "mb-3" },
+            [
+              _c("img", {
+                staticClass: "mr-2 rounded shadow-sm float-left",
+                attrs: {
+                  width: "34px",
+                  src: comment.user_avatar,
+                  alt: comment.user_name
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                _c("div", { staticClass: "card-body p-2 text-secondary" }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _c("strong", [_vm._v(_vm._s(comment.user_name))])
+                  ]),
+                  _vm._v("\n          " + _vm._s(comment.body) + "\n        ")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("LikeBtn", {
+                attrs: {
+                  dusk: "comment-like-btn",
+                  model: comment,
+                  url: "/comments/" + comment.id + "/likes"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { attrs: { dusk: "comment-likes-count" } }, [
+                _vm._v(_vm._s(comment.likes_count))
               ])
-            ])
-          ])
+            ],
+            1
+          )
         }),
         _vm._v(" "),
         _vm.isAuthenticated

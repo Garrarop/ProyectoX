@@ -1,30 +1,49 @@
 <template>
-    <button v-if="status.is_liked" dusk="unlike-btn" @click="unlike(status)" class="btn btn-link btn-sm"><strong><i class="fas fa-thumbs-up text-primary mr-1"></i> TE GUSTA</strong></button>
-    <button v-else dusk="like-btn" @click="like(status)" class="btn btn-link btn-sm"><i class="far fa-thumbs-up text-primary mr-1"></i>ME GUSTA</button>
+    <button @click="toggle()" :class="getBtnClasses"><i :class="getIconClasses"></i>{{ getText }}</button>
 </template>
 
 <script>
  export default {
    props: {
-     status: {
+     model: {
        type: Object,
        required: true
      },
+     url: {
+       type: String,
+       required: true
+     }
    },
    methods: {
-     like(status){
-       axios.post(`/statuses/${status.id}/likes`)
-         .then(res => {
-             status.is_liked = true
-             status.likes_count++;
-         })
+     toggle() {
+       let method = this.model.is_liked ? 'delete' : 'post';
+
+       axios[method](this.url)
+          .then(res => {
+            this.model.is_liked = ! this.model.is_liked;
+            if (method === 'post') {
+              this.model.likes_count++;
+            } else {
+              this.model.likes_count--;
+            }
+          })
+     }
+   },
+   computed: {
+     getText(){
+       return this.model.is_liked ? 'TE GUSTA' : 'ME GUSTA';
      },
-     unlike(status){
-       axios.delete(`/statuses/${status.id}/likes`)
-         .then(res => {
-             status.is_liked = false
-             status.likes_count--;
-         })
+     getBtnClasses(){
+       return[
+         this.model.is_liked ? 'font-weight-bold' : '',
+         'btn', 'btn-link', 'btn-sm',
+       ]
+     },
+     getIconClasses(){
+       return [
+         this.model.is_liked ? 'fas' : 'far',
+         'fa-thumbs-up', 'text-primary', 'mr-1',
+       ]
      }
    }
  }
