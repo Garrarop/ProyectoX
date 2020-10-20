@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\UserResource;
 use App\Http\Resources\CommentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,11 +19,10 @@ class StatusResource extends JsonResource
         return [
           'id' => $this->id,
           'body' => $this->body,
-          'user_name' => $this->user->name,
-          'user_avatar' => 'https://i.ibb.co/HtZWgQj/default-avatar.jpg',
           'ago' => $this->created_at->diffForHumans(),
           'is_liked' => $this->isLiked(),
           'likes_count' => $this->likesCount(),
+          'user' => UserResource::make($this->user),
           'comments' => CommentResource::collection($this->comments)
         ];
     }

@@ -38540,17 +38540,19 @@ var render = function() {
           staticClass: "rounded mr-3 shadow-sm",
           attrs: {
             width: "40px",
-            src: "https://i.ibb.co/HtZWgQj/default-avatar.jpg",
-            alt: "default-avatar",
+            src: _vm.status.user.avatar,
+            alt: _vm.status.user.name,
             border: "0"
           }
         }),
         _vm._v(" "),
         _c("div", {}, [
-          _c("h5", {
-            staticClass: "mb-1",
-            domProps: { textContent: _vm._s(_vm.status.user_name) }
-          }),
+          _c("h5", { staticClass: "mb-1" }, [
+            _c("a", {
+              attrs: { href: _vm.status.user.link },
+              domProps: { textContent: _vm._s(_vm.status.user.name) }
+            })
+          ]),
           _vm._v(" "),
           _c("div", {
             staticClass: "small text-muted",
@@ -38602,8 +38604,8 @@ var render = function() {
                 staticClass: "mr-2 rounded shadow-sm",
                 attrs: {
                   height: "34px",
-                  src: comment.user_avatar,
-                  alt: comment.user_name
+                  src: comment.user.avatar,
+                  alt: comment.user.name
                 }
               }),
               _vm._v(" "),
@@ -38616,8 +38618,8 @@ var render = function() {
                         "card-body pt-2 pl-2 pr-2 pb-0 text-secondary"
                     },
                     [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _c("strong", [_vm._v(_vm._s(comment.user_name))])
+                      _c("a", { attrs: { href: comment.user.link } }, [
+                        _c("strong", [_vm._v(_vm._s(comment.user.name))])
                       ]),
                       _vm._v(
                         "\n              " +
@@ -38675,7 +38677,7 @@ var render = function() {
                     staticClass: "mr-2 rounded shadow-sm",
                     attrs: {
                       width: "34px",
-                      src: "https://i.ibb.co/HtZWgQj/default-avatar.jpg",
+                      src: _vm.currentUser.avatar,
                       alt: _vm.currentUser.name
                     }
                   }),
