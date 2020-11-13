@@ -1,0 +1,46 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+RegistrationTest	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^class RegistrationTest extends TestCase$/;"	class	line:12
+users_can_register	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function users_can_register()$/;"	function	line:16
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^        $response = $this->post(route('register'), $this->userValidData());$/;"	variable	line:18
+the_name_is_required	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_name_is_required()$/;"	function	line:36
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:38
+the_name_must_be_a_string	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_name_must_be_a_string()$/;"	function	line:44
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:46
+the_name_not_be_greater_than_60_characters	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_name_not_be_greater_than_60_characters()$/;"	function	line:52
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:54
+the_first_name_is_required	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_first_name_is_required()$/;"	function	line:61
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:63
+the_first_name_must_be_a_string	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_first_name_must_be_a_string()$/;"	function	line:69
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:71
+the_first_name_not_be_greater_than_60_characters	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_first_name_not_be_greater_than_60_characters()$/;"	function	line:77
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:79
+the_last_name_is_required	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_last_name_is_required()$/;"	function	line:86
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:88
+the_last_name_must_be_a_string	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_last_name_must_be_a_string()$/;"	function	line:94
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:96
+the_last_name_not_be_greater_than_60_characters	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_last_name_not_be_greater_than_60_characters()$/;"	function	line:102
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:104
+the_email_is_required	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_email_is_required()$/;"	function	line:111
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:113
+the_email_must_be_a_valid_email_address	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_email_must_be_a_valid_email_address()$/;"	function	line:119
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:121
+the_email_must_be_unique	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_email_must_be_unique()$/;"	function	line:127
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:130
+the_password_is_required	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_password_is_required()$/;"	function	line:137
+pass	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $pass = null;$/;"	variable	line:139
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:140
+the_password_must_be_a_string	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_password_must_be_a_string()$/;"	function	line:146
+pass	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $pass = 123456789;$/;"	variable	line:148
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:149
+the_password_must_be_at_least_8_characters	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_password_must_be_at_least_8_characters()$/;"	function	line:155
+pass	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $pass = Str::random(7);$/;"	variable	line:157
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:158
+the_password_must_be_confirmed	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    public function the_password_must_be_confirmed()$/;"	function	line:164
+pass	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $pass = Str::random(8);$/;"	variable	line:166
+response	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^      $response = $this->post($/;"	variable	line:167
+userValidData	C:\Users\Garraro\Desktop\ProyectoWeb\ProyectoX\tests\Feature\RegistrationTest.php	/^    protected function userValidData($overrides = []): array$/;"	function	line:173
