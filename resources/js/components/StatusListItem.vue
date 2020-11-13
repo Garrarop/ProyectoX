@@ -41,7 +41,7 @@
       </div>
       <form @submit.prevent="addComment" v-if="isAuthenticated">
         <div class="d-flex align-items-center">
-          <img width="34px" class="mr-2 rounded shadow-sm" :src="currentUser.avatar" :alt="currentUser.name">
+          <img width="34px" class="mr-2 rounded shadow-sm" src="https://i.ibb.co/HtZWgQj/default-avatar.jpg" :alt="currentUser.name">
           <div class="input-group">
             <textarea class="form-control border-0 shadow-sm" required placeholder="Escribe un comentario" name="comment" rows="1" v-model="newComment"></textarea>
             <div class="input-group-append">
