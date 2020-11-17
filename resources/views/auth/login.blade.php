@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+                @include('partials.validation-errors')
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -53,7 +53,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button id="login-btn" type="submit" class="btn btn-primary">
+                                <button dusk="login-btn" type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 
