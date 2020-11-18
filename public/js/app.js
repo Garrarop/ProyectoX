@@ -38677,7 +38677,7 @@ var render = function() {
                     staticClass: "mr-2 rounded shadow-sm",
                     attrs: {
                       width: "34px",
-                      src: _vm.currentUser.avatar,
+                      src: "https://i.ibb.co/HtZWgQj/default-avatar.jpg",
                       alt: _vm.currentUser.name
                     }
                   }),

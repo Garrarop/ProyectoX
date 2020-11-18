@@ -48,11 +48,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                     <i class="fas fa-sign-out-alt text-primary mr-1"></i>
-                                        {{ __('Logout') }}
+                                    <a class="dropdown-item" href="{{ route('users.show',Auth::user()) }}">
+                                      <i class="fas fa-user text-primary mr-2"></i>
+                                      {{ __('Perfil') }}
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                      <i class="fas fa-sign-out-alt text-primary mr-1"></i>
+                                      {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
