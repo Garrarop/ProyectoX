@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\User;
 use Tests\TestCase;
 use App\Models\Status;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ListStatusesTest extends TestCase
 {
@@ -41,5 +41,23 @@ class ListStatusesTest extends TestCase
           $status4->body,
           $response->json('data.0.body')
         );
+    }
+    /** @test */
+    public function can_get_statuses_for_a_specfic_user()
+    {
+      $user = factory(User::class)->create();
+
+      $status1 = factory(Status::Class)->create(['user_id' => $user->id, 'created_at' => now()->subDays(1)]);
+      $status2 = factory(Status::Class)->create(['user_id' => $user->id]);
+
+      $ohterStatuses = factory(Status::class, 2)->create();
+
+      $response = $this->actingAs($user)
+          ->getJson(route('users.statuses.index', $user));
+
+      $response->assertJson([
+        $status2->body,
+        $response->json('data.0.body')
+      ]);
     }
 }
