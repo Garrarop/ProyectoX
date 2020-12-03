@@ -48,16 +48,16 @@ class ListStatusesTest extends TestCase
       $user = factory(User::class)->create();
 
       $status1 = factory(Status::Class)->create(['user_id' => $user->id, 'created_at' => now()->subDays(1)]);
-      $status2 = factory(Status::Class)->create(['user_id' => $user->id]);
+      $status2 = factory(Status::Class)->create(['user_id' => $user->id, 'created_at' => now()]);
 
-      $ohterStatuses = factory(Status::class, 2)->create();
+      $otherStatuses = factory(Status::class, 2)->create();
 
       $response = $this->actingAs($user)
           ->getJson(route('users.statuses.index', $user));
 
-      $response->assertJson([
+      $this->assertEquals(
         $status2->body,
         $response->json('data.0.body')
-      ]);
+      );
     }
 }

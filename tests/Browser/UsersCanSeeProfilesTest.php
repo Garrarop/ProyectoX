@@ -10,6 +10,7 @@ use Tests\DuskTestCase;
 
 class UsersCanSeeProfilesTest extends DuskTestCase
 {
+    use DatabaseMigrations;
     /**
      * @test
      * @throws \Throwable
