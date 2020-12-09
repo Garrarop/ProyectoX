@@ -22,4 +22,13 @@ class AcceptFriendshipsController extends Controller
         'recipient_id' => auth()->id()
       ])->update(['status' => 'denied']);
     }
+
+    public function index()
+    {
+      $friendshipRequests = Friendship::with('sender')->where([
+        'recipient_id' => auth()->id(),
+        ])->get();
+
+      return view('friendships.index', compact('friendshipRequests'));
+    }
 }
