@@ -2021,7 +2021,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getMethod: function getMethod() {
-      if (this.localFriendshipStatus === 'pending') {
+      if (this.localFriendshipStatus === 'pending' || this.localFriendshipStatus === 'accepted') {
         return 'delete';
       }
 
@@ -2032,6 +2032,14 @@ __webpack_require__.r(__webpack_exports__);
     getText: function getText() {
       if (this.localFriendshipStatus === 'pending') {
         return 'Cancelar solicitud';
+      }
+
+      if (this.localFriendshipStatus === 'accepted') {
+        return 'Eliminar de mis amigos';
+      }
+
+      if (this.localFriendshipStatus === 'denied') {
+        return 'Solicitud denegada';
       }
 
       return 'Solicitar amistad';
@@ -38532,9 +38540,14 @@ var render = function() {
       ? _c("div", [
           _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } }),
           _vm._v("  te ha enviado una solicitud de amistad\n    "),
-          _c("button", { on: { click: _vm.acceptFriendshipsRequest } }, [
-            _vm._v("Aceptar solicitud")
-          ]),
+          _c(
+            "button",
+            {
+              attrs: { dusk: "accept-friendship" },
+              on: { click: _vm.acceptFriendshipsRequest }
+            },
+            [_vm._v("Aceptar solicitud")]
+          ),
           _vm._v(" "),
           _c(
             "button",
@@ -38549,8 +38562,7 @@ var render = function() {
       ? _c("div", [
           _vm._v("\n    Tú y "),
           _c("span", { domProps: { textContent: _vm._s(_vm.sender.name) } }),
-          _vm._v(" "),
-          _c("span", [_vm._v("son amigos")])
+          _vm._v(" son amigos\n  ")
         ])
       : _vm.localFriendshipStatus === "denied"
       ? _c("div", [

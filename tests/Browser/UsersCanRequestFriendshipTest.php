@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class UsersCanRequestFriendshipTest extends DuskTestCase
 {
     use DatabaseMigrations;
-  /**
+   /**
    * @test
    * @throws \Throwable
    */
@@ -35,83 +35,138 @@ class UsersCanRequestFriendshipTest extends DuskTestCase
                     ->assertSee('Solicitar amistad');
         });
     }
+    /**
+    * @test
+    * @throws \Throwable
+    */
+    public function senders_can_delete_accepted_friendship_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+        factory(Status::class)->create(['user_id' => $recipient->id]);
 
-        /**
-         * @test
-         * @throws \Throwable
-         */
-          public function recipients_can_accept_friendship_requests()
-          {
-              $sender = factory(User::class)->create();
-              $recipient = factory(User::class)->create();
+        Friendship::create([
+          'sender_id' => $sender->id,
+          'recipient_id' => $recipient->id,
+          'status' => 'accepted'
+        ]);
 
-              Friendship::create([
-                'sender_id' => $sender->id,
-                'recipient_id' => $recipient->id,
-              ]);
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($sender)
+                    ->visit("/@{$recipient->name}")
+                    ->assertSee('Eliminar de mis amigos')
+                    ->press('@request-friendship')
+                    ->waitForText('Solicitar amistad')
+                    ->assertSee('Solicitar amistad')
+                    ->visit("/@{$recipient->name}")
+                    ->assertSee('Solicitar amistad');
+        });
+    }
+    /**
+    * @test
+    * @throws \Throwable
+    */
+    public function senders_cannot_delete_denied_friendship_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+        factory(Status::class)->create(['user_id' => $recipient->id]);
 
-              $this->browse(function (Browser $browser) use ($sender, $recipient) {
-                  $browser->loginAs($recipient)
-                          ->visit(route('accept-friendships.index'))
-                          ->assertSee($sender->name)
-                          ->press('@accept-friendship')
-                          ->waitForText('son amigos',12)
-                          ->assertSee('son amigos')
-                          ;
-              });
-          }
+        Friendship::create([
+          'sender_id' => $sender->id,
+          'recipient_id' => $recipient->id,
+          'status' => 'denied'
+        ]);
 
-          /**
-           * @test
-           * @throws \Throwable
-           */
-            public function recipients_can_deny_friendship_requests()
-            {
-                $sender = factory(User::class)->create();
-                $recipient = factory(User::class)->create();
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($sender)
+                    ->visit("/@{$recipient->name}")
+                    ->assertSee('Solicitud denegada')
+                    ->press('@request-friendship')
+                    ->waitForText('Solicitud denegada')
+                    ->assertSee('Solicitud denegada')
+                    ->visit("/@{$recipient->name}")
+                    ->assertSee('Solicitud denegada');
+        });
+    }
 
-                Friendship::create([
-                  'sender_id' => $sender->id,
-                  'recipient_id' => $recipient->id,
-                ]);
+    /**
+    * @test
+    * @throws \Throwable
+    */
+    public function recipients_can_accept_friendship_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
 
-                $this->browse(function (Browser $browser) use ($sender, $recipient) {
-                    $browser->loginAs($recipient)
-                            ->visit(route('accept-friendships.index'))
-                            ->assertSee($sender->name)
-                            ->press('@deny-friendship')
-                            ->waitForText('Solicitud denegada')
-                            ->assertSee('Solicitud denegada')
-                            ->visit(route('accept-friendships.index'))
-                            ->assertSee('Solicitud denegada')
-                            ;
-                });
-            }
+        Friendship::create([
+          'sender_id' => $sender->id,
+          'recipient_id' => $recipient->id,
+        ]);
 
-            /**
-             * @test
-             * @throws \Throwable
-             */
-              public function recipients_can_delete_friendship_requests()
-              {
-                  $sender = factory(User::class)->create();
-                  $recipient = factory(User::class)->create();
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($recipient)
+                    ->visit(route('accept-friendships.index'))
+                    ->assertSee($sender->name)
+                    ->press('@accept-friendship')
+                    ->screenshot('asd')
+                    ->waitForText("Tú y $sender->name son amigos")
+                    ->assertSee("Tú y $sender->name son amigos")
+                    ;
+        });
+    }
 
-                  Friendship::create([
-                    'sender_id' => $sender->id,
-                    'recipient_id' => $recipient->id,
-                  ]);
+    /**
+    * @test
+    * @throws \Throwable
+    */
+    public function recipients_can_deny_friendship_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
 
-                  $this->browse(function (Browser $browser) use ($sender, $recipient) {
-                      $browser->loginAs($recipient)
-                              ->visit(route('accept-friendships.index'))
-                              ->assertSee($sender->name)
-                              ->press('@delete-friendship')
-                              ->waitForText('Solicitud eliminada')
-                              ->assertSee('Solicitud eliminada')
-                              ->visit(route('accept-friendships.index'))
-                              ->assertDontSee('Solicitud eliminada')
-                              ;
-                  });
-              }
+        Friendship::create([
+          'sender_id' => $sender->id,
+          'recipient_id' => $recipient->id,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($recipient)
+                    ->visit(route('accept-friendships.index'))
+                    ->assertSee($sender->name)
+                    ->press('@deny-friendship')
+                    ->waitForText('Solicitud denegada')
+                    ->assertSee('Solicitud denegada')
+                    ->visit(route('accept-friendships.index'))
+                    ->assertSee('Solicitud denegada')
+                    ;
+        });
+    }
+
+    /**
+    * @test
+    * @throws \Throwable
+    */
+    public function recipients_can_delete_friendship_requests()
+    {
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+
+        Friendship::create([
+          'sender_id' => $sender->id,
+          'recipient_id' => $recipient->id,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($sender, $recipient) {
+            $browser->loginAs($recipient)
+                    ->visit(route('accept-friendships.index'))
+                    ->assertSee($sender->name)
+                    ->press('@delete-friendship')
+                    ->waitForText('Solicitud eliminada')
+                    ->assertSee('Solicitud eliminada')
+                    ->visit(route('accept-friendships.index'))
+                    ->assertDontSee('Solicitud eliminada')
+                    ;
+        });
+    }
 }
