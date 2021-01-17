@@ -12,6 +12,20 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class UsersCanRequestFriendshipTest extends DuskTestCase
 {
     use DatabaseMigrations;
+    /**
+    * @test
+    * @throws \Throwable
+    */
+     public function guest_cannot_create_and_delete_friendship_requests()
+     {
+         $recipient = factory(User::class)->create();
+
+         $this->browse(function (Browser $browser) use ($recipient) {
+             $browser->visit("/@{$recipient->name}")
+                     ->press('@request-friendship')
+                     ->assertPathIs('/login');
+         });
+     }
    /**
    * @test
    * @throws \Throwable
@@ -20,7 +34,6 @@ class UsersCanRequestFriendshipTest extends DuskTestCase
     {
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
-        factory(Status::class)->create(['user_id' => $recipient->id]);
 
         $this->browse(function (Browser $browser) use ($sender, $recipient) {
             $browser->loginAs($sender)
@@ -35,6 +48,20 @@ class UsersCanRequestFriendshipTest extends DuskTestCase
                     ->assertSee('Solicitar amistad');
         });
     }
+    /**
+    * @test
+    * @throws \Throwable
+    */
+     public function a_user_cannot_send_friend_request_to_itself()
+     {
+         $user = factory(User::class)->create();
+
+         $this->browse(function (Browser $browser) use ($user) {
+             $browser->loginAs($user)
+                     ->visit("/@{$user->name}")
+                     ->assertMissing('@request-friendship');
+         });
+     }
     /**
     * @test
     * @throws \Throwable
@@ -109,7 +136,6 @@ class UsersCanRequestFriendshipTest extends DuskTestCase
                     ->visit(route('accept-friendships.index'))
                     ->assertSee($sender->name)
                     ->press('@accept-friendship')
-                    ->screenshot('asd')
                     ->waitForText("Tú y $sender->name son amigos")
                     ->assertSee("Tú y $sender->name son amigos")
                     ;

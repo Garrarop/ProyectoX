@@ -8,7 +8,11 @@
           <img src="{{ $user->avatar }}" alt="{{$user->name}}" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{ $user->name }}</h5>
-            <friendship-btn class="btn btn-primary btn-block" :recipient="{{ $user }}" friendship-status="{{ $friendshipStatus }}"></friendship-btn>
+            @if(auth()->id() === $user->id)
+              {{-- Boton de configuraciones --}}
+            @else
+              <friendship-btn class="btn btn-primary btn-block" :recipient="{{ $user }}" friendship-status="{{ $friendshipStatus }}"></friendship-btn>
+            @endif
           </div>
         </div>
       </div>

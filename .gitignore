@@ -1,5 +1,7 @@
 /node_modules
 /public/hot
+/public/ico-512.png
+/public/Logo-512.png
 /public/storage
 /storage/*.key
 /vendor
